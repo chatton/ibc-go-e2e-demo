@@ -1,49 +1,46 @@
 name: Run ibc-go E2E Tests
 on:
-  push:
-
+  push: {}
 jobs:
   e2e:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         include:
-        - test: TestClientUpdateProposal_Succeeds
-          entrypoint: TestClientTestSuite
-        - test: TestMsgTransfer_Succeeds_Nonincentivized
-          entrypoint: TestTransferTestSuite
-        - test: TestMsgTransfer_Fails_InvalidAddress
-          entrypoint: TestTransferTestSuite
-        - test: TestMsgTransfer_Timeout_Nonincentivized
-          entrypoint: TestTransferTestSuite
-        - test: TestSendEnabledParam
-          entrypoint: TestTransferTestSuite
-        - test: TestReceiveEnabledParam
-          entrypoint: TestTransferTestSuite
-        - test: TestMsgPayPacketFee_AsyncSingleSender_Succeeds
-          entrypoint: TestIncentivizedTransferTestSuite
-        - test: TestMsgPayPacketFee_InvalidReceiverAccount
-          entrypoint: TestIncentivizedTransferTestSuite
-        - test: TestMultiMsg_MsgPayPacketFeeSingleSender
-          entrypoint: TestIncentivizedTransferTestSuite
-        - test: TestMsgPayPacketFee_SingleSender_TimesOut
-          entrypoint: TestIncentivizedTransferTestSuite
-        - test: TestPayPacketFeeAsync_SingleSender_NoCounterPartyAddress
-          entrypoint: TestIncentivizedTransferTestSuite
-        - test: TestMsgPayPacketFee_AsyncMultipleSenders_Succeeds
-          entrypoint: TestIncentivizedTransferTestSuite
+          - test: TestClientUpdateProposal_Succeeds
+            entrypoint: TestClientTestSuite
+          - test: TestMsgTransfer_Succeeds_Nonincentivized
+            entrypoint: TestTransferTestSuite
+          - test: TestMsgTransfer_Fails_InvalidAddress
+            entrypoint: TestTransferTestSuite
+          - test: TestMsgTransfer_Timeout_Nonincentivized
+            entrypoint: TestTransferTestSuite
+          - test: TestSendEnabledParam
+            entrypoint: TestTransferTestSuite
+          - test: TestReceiveEnabledParam
+            entrypoint: TestTransferTestSuite
+          - test: TestMsgPayPacketFee_AsyncSingleSender_Succeeds
+            entrypoint: TestIncentivizedTransferTestSuite
+          - test: TestMsgPayPacketFee_InvalidReceiverAccount
+            entrypoint: TestIncentivizedTransferTestSuite
+          - test: TestMultiMsg_MsgPayPacketFeeSingleSender
+            entrypoint: TestIncentivizedTransferTestSuite
+          - test: TestMsgPayPacketFee_SingleSender_TimesOut
+            entrypoint: TestIncentivizedTransferTestSuite
+          - test: TestPayPacketFeeAsync_SingleSender_NoCounterPartyAddress
+            entrypoint: TestIncentivizedTransferTestSuite
+          - test: TestMsgPayPacketFee_AsyncMultipleSenders_Succeeds
+            entrypoint: TestIncentivizedTransferTestSuite
     steps:
       - name: Checkout the ibc-go repo in the e2e directory.
         uses: actions/checkout@v3
         with:
           repository: cosmos/ibc-go
           path: e2e
-       - name: Run E2E tests with custom chain image.
-         run: make e2e-test entrypoint=${{ matrix.entrypoint }} test=${{ matrix.test }}
-         env:
-          # Configure these values however you like to configure
-          # any custom image or tag.
-          CHAIN_IMAGE: "ghcr.io/cosmos/ibc-go-simd"
-          CHAIN_A_TAG: "main"
-          CHAIN_B_TAG: "main"
-          RLY_TAG: "v2.0.0"
+      - name: Run E2E tests with custom chain image.
+        run: make e2e-test entrypoint=${{ matrix.entrypoint }} test=${{ matrix.test}}
+        env:
+          CHAIN_IMAGE: ghcr.io/cosmos/ibc-go-simd
+          CHAIN_A_TAG: main
+          CHAIN_B_TAG: main
+          RLY_TAG: v2.0.0
