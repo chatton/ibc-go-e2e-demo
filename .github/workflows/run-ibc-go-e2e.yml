@@ -11,6 +11,7 @@ jobs:
       matrix:
         # entrypoint corresponds to the test function in the test files which fall under the e2e directory.
         # test is the name of the test function to be run.
+        # see the e2e docs https://github.com/cosmos/ibc-go/tree/main/e2e for more details.
         include:
           - test: TestClientUpdateProposal_Succeeds
             entrypoint: TestClientTestSuite
