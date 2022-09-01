@@ -55,4 +55,5 @@ jobs:
           CHAIN_IMAGE: ghcr.io/cosmos/ibc-go-simd
           CHAIN_A_TAG: main
           CHAIN_B_TAG: main
+          CHAIN_BINARY: simd
           RLY_TAG: v2.0.0
