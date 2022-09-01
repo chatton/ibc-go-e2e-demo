@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        # entrypoint corresponds to the test function in the test files which fall under the e2e directory.
+        # test is the name of the test function to be run.
         include:
           - test: TestClientUpdateProposal_Succeeds
             entrypoint: TestClientTestSuite
@@ -35,7 +37,7 @@ jobs:
           - test: TestMsgPayPacketFee_AsyncMultipleSenders_Succeeds
             entrypoint: TestIncentivizedTransferTestSuite
     steps:
-      - name: Checkout the ibc-go repo in the e2e directory.
+      - name: Checkout the ibc-go repo.
         uses: actions/checkout@v3
         with:
           repository: cosmos/ibc-go
@@ -48,6 +50,7 @@ jobs:
           cd e2e
           make e2e-test entrypoint=${{ matrix.entrypoint }} test=${{ matrix.test}}
         env:
+          # Configure this however you like in order to specify your own custom image and tags.
           CHAIN_IMAGE: ghcr.io/cosmos/ibc-go-simd
           CHAIN_A_TAG: main
           CHAIN_B_TAG: main
