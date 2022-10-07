@@ -8,6 +8,7 @@ jobs:
   e2e:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false # ensure that a single test failure doesn't cause all tests to fail
       matrix:
         # entrypoint corresponds to the test function in the test files which fall under the e2e directory.
         # test is the name of the test function to be run.
