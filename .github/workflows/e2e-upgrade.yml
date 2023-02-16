@@ -7,7 +7,7 @@ on:
 
 jobs:
   ibc-upgrade:
-    uses: cosmos/ibc-go/.github/workflows/e2e-test-workflow-call.yml@18f58c4c01d383df5a87776be83ec416ac5465cc
+    uses: cosmos/ibc-go/.github/workflows/e2e-test-workflow-call.yml@damian/cian-upgrade-workflow
     with:
       chain-image: ghcr.io/cosmos/ibc-go-simd
       chain-binary: simd
@@ -23,7 +23,7 @@ jobs:
       test: "TestIBCChainUpgrade"
 
   regular-upgrade:
-    uses: cosmos/ibc-go/.github/workflows/e2e-test-workflow-call.yml@18f58c4c01d383df5a87776be83ec416ac5465cc
+    uses: cosmos/ibc-go/.github/workflows/e2e-test-workflow-call.yml@damian/cian-upgrade-workflow
     with:
       chain-image: damiannolan/sdk-simd
       chain-binary: simd
